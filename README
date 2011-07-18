@@ -1,0 +1,37 @@
+release_metrics macro for mingle
+
+* shows information about the current release
+** currently has two different views
+*** full table view with all the metrics below
+*** mini view with (last 3 and total average date estimates)
+*** use parameter 'view: mini_table' to see the mini view
+*** you can create new views by creating an erb file in the views folder, use the current views as examples
+** average velocity for last 3 iterations
+** competed iterations
+** completed story points
+** remaining story points
+** iteration length (in days based on the last completed iteration)
+** estimates for remaining iteration and end dates based on
+*** average velocity for last 3 iterations
+*** average velocity for all iterations in the release
+*** best velocity
+*** worst velocity
+
+If you are using Iteration type with Velocity, Start Date and End Date fields, a Release type with an End Date
+ field, and a Current Release project variable then you can use the defaults.
+
+{{
+  release_metrics
+}}
+
+override the defaults: (note: end_date is used on both the Release and time_box types)
+
+{{
+  release_metrics
+    time_box: 'sprint'
+    release: '#1 Release 1'
+    start_date: 'Begin Date'
+    end_date: 'Finish Date'
+    velocity: 'Completed Story Estimate Sum'
+    view: mini_table
+}}

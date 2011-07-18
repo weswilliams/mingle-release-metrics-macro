@@ -1,0 +1,90 @@
+<h2>Metrics for
+  <a href="/projects/<%= @project.identifier %>/cards/<%= card_number release_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
+    #<%= card_number release_parameter %> <%= card_name release_parameter %>
+  </a>
+</h2>
+<ul>
+  <li>Scheduled End Date is <%= release.end_date %></li>
+</ul>
+
+
+<table>
+  <tr>
+    <th>Current Iteration</th>
+    <td>
+      <a href="/projects/<%= @project.identifier %>/cards/<%= card_number iteration_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
+        #<%= card_number iteration_parameter %> <%= card_name iteration_parameter %>
+      </a>
+    </td>
+    <th> </th>
+    <th>Estimated Completion <br/> of
+      <a href="/projects/<%= @project.identifier %>/cards/<%= card_number release_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
+        #<%= card_number release_parameter %> <%= card_name release_parameter %>
+      </a>
+    </th>
+    <th>Required <br/> Iterations</th>
+    <th>Calculated Development End Date <br/> Based on <%= release.days_in_iteration %> Day Iterations</th>
+  </tr>
+  <tr>
+    <th>Average Velocity <br/> (last 3 iterations)</th>
+    <td><%= "%.2f" % release.last_3_average %></td>
+    <th> </th>
+    <td> Average velocity of <br/> last 3 iterations (<%= "%.2f" % release.last_3_average %>)</td>
+    <td><%= release.remaining_iters :last_3_average %></td>
+    <td><%= release.completion_date :last_3_average %></td>
+  </tr>
+  <tr>
+    <th>Completed Iterations</th>
+    <td><%= release.completed_iterations %></td>
+    <th> </th>
+    <td> Average velocity of <br/> all iterations (<%= "%.2f" % release.average_velocity %>)</td>
+    <td><%= release.remaining_iters :average_velocity %></td>
+    <td><%= release.completion_date :average_velocity %></td>
+  </tr>
+  <tr>
+    <th>Completed Story Points</th>
+    <td><%= release.completed_story_points %></td>
+    <th> </th>
+    <td> Best velocity (<%= release.best_velocity %>)</td>
+    <td><%= release.remaining_iters :best_velocity %></td>
+    <td><%= release.completion_date :best_velocity %></td>
+  </tr>
+  <tr>
+    <th>Remaining Story Points <br/> (includes all stories not <br/> in a past iteration)</th>
+    <td><%= release.remaining_story_points %></td>
+    <th> </th>
+    <td> Worst velocity (<%= release.worst_velocity %>)</td>
+    <td><%= release.remaining_iters :worst_velocity %></td>
+    <td><%= release.completion_date :worst_velocity %></td>
+  </tr>
+  <tr>
+    <th>Iteration Length <br/> (calculated based on <br/> last iteration completed)</th>
+    <td><%= release.days_in_iteration %> days</td>
+    <th> </th>
+    <td><% if show_what_if_parameter %>What if velocity: <input type="text" id="what-if-velocity"/><% end %></td>
+    <td><% if show_what_if_parameter %><span id="what-if-iterations"></span><% end %></td>
+    <td><% if show_what_if_parameter %>What if date: <input type="text" id="what-if-date"/><% end %></td>
+  </tr>
+</table>
+
+<p><span id="debug-info"></span></p>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var releaseMetrics = {};
+</script>
+<script language="javascript" type="text/javascript" src="../../../../plugin_assets/release_metrics/javascripts/what.if.js"></script>
+<script language="javascript" type="text/javascript" src="../../../../plugin_assets/release_metrics/javascripts/debug.js"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    var macroDebug = releaseMetrics.macroDebug(true, jQuery("#debug-info"));
+    // register the initialize function for executing after page loaded.
+    MingleJavascript.register(function initialize() {
+        try {
+            macroDebug.log('starting whatIf');
+            whatIf.init(<%= release.days_in_iteration %>, <%= release.remaining_story_points %>, new Date('<%= release.last_end_date %>'));
+        } catch(err) {
+            macroDebug(err);
+        }
+    });
+</script>
