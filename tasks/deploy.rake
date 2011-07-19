@@ -28,8 +28,8 @@ namespace :macro do |ns|
   end
 
   task :deploy do
-    macro_folder = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-    mingle_plugins_folder = File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins')
+    macro_folder = File.expand_path(".")
+    mingle_plugins_folder = File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins', "release_metrics")
     FileUtils.cp_r(macro_folder, mingle_plugins_folder)
     puts "#{macro_folder} successfully deployed to #{mingle_plugins_folder}. Mingle server must be restarted."
   end
