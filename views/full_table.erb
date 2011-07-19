@@ -77,7 +77,7 @@
 <script language="javascript" type="text/javascript" src="../../../../plugin_assets/release_metrics/javascripts/debug.js"></script>
 <script type="text/javascript">
     jQuery.noConflict();
-    var macroDebug = releaseMetrics.macroDebug(true, jQuery("#debug-info"));
+    var macroDebug = releaseMetrics.macroDebug(<%= debug_parameter %>, jQuery("#debug-info"));
     // register the initialize function for executing after page loaded.
     MingleJavascript.register(function initialize() {
         try {

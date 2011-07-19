@@ -23,8 +23,7 @@ namespace :macro do |ns|
 
   task :clean_deploy do
     puts "Remove deployed macro if it exists"
-    macro_name = File.basename(File.expand_path(File.join(File.dirname(__FILE__), '..')))
-    FileUtils.rm_rf(File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins', macro_name))
+    FileUtils.rm_rf(File.join(ENV['MINGLE_LOCATION'], 'vendor', 'plugins', "release_metrics"))
   end
 
   task :deploy do
