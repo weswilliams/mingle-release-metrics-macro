@@ -34,4 +34,5 @@ override the defaults: (note: end_date is used on both the Release and time_box 
     end_date: 'Finish Date'
     velocity: 'Completed Story Estimate Sum'
     view: mini_table
+    mingle_url: http:/yourserver:port/root
 }}

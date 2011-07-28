@@ -18,7 +18,8 @@ module CustomMacro
          'show_what_if' => false,
          'mini' => false,
          'debug' => false,
-         'view' => 'full_table')
+         'view' => 'full_table',
+         'mingle_url' => '')
     end
 
     def execute

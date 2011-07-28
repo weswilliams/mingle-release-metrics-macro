@@ -69,12 +69,12 @@
 
 <p><span id="debug-info"></span></p>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="<%= mingle_url_parameter %>/plugin_assets/release_metrics/javascripts/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     var releaseMetrics = {};
 </script>
-<script language="javascript" type="text/javascript" src="../../../../plugin_assets/release_metrics/javascripts/what.if.js"></script>
-<script language="javascript" type="text/javascript" src="../../../../plugin_assets/release_metrics/javascripts/debug.js"></script>
+<script language="javascript" type="text/javascript" src="<%= mingle_url_parameter %>/plugin_assets/release_metrics/javascripts/what.if.js"></script>
+<script language="javascript" type="text/javascript" src="<%= mingle_url_parameter %>/plugin_assets/release_metrics/javascripts/debug.js"></script>
 <script type="text/javascript">
     jQuery.noConflict();
     var macroDebug = releaseMetrics.macroDebug(<%= debug_parameter %>, jQuery("#debug-info"));
