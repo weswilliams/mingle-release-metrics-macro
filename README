@@ -16,6 +16,7 @@ release_metrics macro for mingle
 *** average velocity for all iterations in the release
 *** best velocity
 *** worst velocity
+** what if velocity and date fields
 
 If you are using Iteration type with Velocity, Start Date and End Date fields, a Release type with an End Date
  field, and a Current Release project variable then you can use the defaults.
@@ -34,5 +35,6 @@ override the defaults: (note: end_date is used on both the Release and time_box 
     end_date: 'Finish Date'
     velocity: 'Completed Story Estimate Sum'
     view: mini_table
+    show_what_if: yes
     mingle_url: http:/yourserver:port/root
 }}
