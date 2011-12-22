@@ -140,7 +140,12 @@ module CustomMacro
 
   def card_description(card_identifier_name)
     return card_identifier_name if this_card(card_identifier_name)
-    "# #{card_number(card_identifier_name)} #{card_name(card_identifier_name)}"
+    "##{card_number(card_identifier_name)} #{card_name(card_identifier_name)}"
+  end
+
+  def card_url(card_identifier_name)
+    return '' if this_card(card_identifier_name)
+    "/projects/#{@project.identifier}/cards/#{card_number card_identifier_name}"
   end
 
 end

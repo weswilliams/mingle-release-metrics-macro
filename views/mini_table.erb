@@ -4,7 +4,7 @@
     <td><%= release.end_date %></td>
     <th> </th>
     <th>Estimated Completion <br/> of
-      <a href="/projects/<%= @project.identifier %>/cards/<%= card_number release_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
+      <a href="<%= card_url release_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
         <%= card_description release_parameter %>
       </a>
     </th>
