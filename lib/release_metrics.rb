@@ -56,7 +56,7 @@ module CustomMacro
     def current_release(release_data)
       begin
         release_where = "Number = #{card_number release_parameter}"
-        release_where = "Number = #{release_parameter.upcase}.'Number'" if this_card
+        release_where = "Number = #{release_parameter.upcase}.'Number'" if this_card(release_parameter)
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
         Release.new data_rows[0], release_data, @parameters
@@ -77,12 +77,12 @@ module CustomMacro
       end
     end
 
-    def this_card
-      release_parameter.upcase == 'THIS CARD'
+    def this_card(card_identifier_name)
+      card_identifier_name.upcase == 'THIS CARD'
     end
 
     def release_where
-      this_card ? "release = #{release_parameter.upcase}" : "release = '#{card_name release_parameter}'"
+      this_card(release_parameter) ? "release = #{release_parameter.upcase}" : "release = '#{card_name release_parameter}'"
     end
 
     def stories(completed_iterations, remaining_stories = true)
@@ -125,12 +125,22 @@ module CustomMacro
     card_identifier_name
   end
 
+  def card_property_selector(card_identifier_name, regex)
+    return card_identifier_name if this_card(card_identifier_name)
+    find_first_match(card_identifier_name, regex)
+  end
+
   def card_name(card_identifier_name)
-    find_first_match(card_identifier_name, /#\d+ (.*)/)
+    card_property_selector(card_identifier_name, /#\d+ (.*)/)
   end
 
   def card_number(card_identifier_name)
-    find_first_match(card_identifier_name, /#(\d+).*/).to_i
+    card_property_selector(card_identifier_name, /#(\d+).*/)
+  end
+
+  def card_description(card_identifier_name)
+    return card_identifier_name if this_card(card_identifier_name)
+    "# #{card_number(card_identifier_name)} #{card_name(card_identifier_name)}"
   end
 
 end

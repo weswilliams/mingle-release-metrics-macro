@@ -1,6 +1,6 @@
 <h2>Metrics for
   <a href="/projects/<%= @project.identifier %>/cards/<%= card_number release_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
-    #<%= card_number release_parameter %> <%= card_name release_parameter %>
+    <%= card_description release_parameter %>
   </a>
 </h2>
 <ul>
@@ -19,7 +19,7 @@
     <th> </th>
     <th>Estimated Completion <br/> of
       <a href="/projects/<%= @project.identifier %>/cards/<%= card_number release_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
-        #<%= card_number release_parameter %> <%= card_name release_parameter %>
+        <%= card_description release_parameter %>
       </a>
     </th>
     <th>Required <br/> Iterations</th>
