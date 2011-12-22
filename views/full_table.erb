@@ -13,7 +13,7 @@
     <th>Current Iteration</th>
     <td>
       <a href="/projects/<%= @project.identifier %>/cards/<%= card_number iteration_parameter %>" class="card-link-1" onmouseover="new Tooltip(this, event)">
-        #<%= card_number iteration_parameter %> <%= card_name iteration_parameter %>
+        <%= card_description iteration_parameter %>
       </a>
     </td>
     <th> </th>
