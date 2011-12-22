@@ -56,7 +56,7 @@ module CustomMacro
     def current_release(release_data)
       begin
         release_where = "Number = #{card_number release_parameter}"
-        release_where = "Number = #{release_parameter}.'Number'" if release_parameter == 'THIS CARD'
+        release_where = "Number = #{release_parameter.upcase}.'Number'" if this_card
         data_rows = @project.execute_mql("SELECT '#{end_date_field}' WHERE #{release_where}")
         raise "##{release_parameter} is not a valid release" if data_rows.empty?
         Release.new data_rows[0], release_data, @parameters
@@ -77,8 +77,12 @@ module CustomMacro
       end
     end
 
+    def this_card
+      release_parameter.upcase == 'THIS CARD'
+    end
+
     def release_where
-      release_parameter == 'THIS CARD' ? "release = #{release_parameter}" : "release = '#{card_name release_parameter}'"
+      this_card ? "release = #{release_parameter.upcase}" : "release = '#{card_name release_parameter}'"
     end
 
     def stories(completed_iterations, remaining_stories = true)
