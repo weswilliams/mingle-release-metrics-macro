@@ -20,7 +20,7 @@ describe "parameters" do
 
     describe "current release number" do
       subject { @macro.card_number @macro.release_parameter}
-      it { should == 1 }
+      it { should == "1" }
     end
 
     describe "release_name" do
@@ -33,7 +33,7 @@ describe "parameters" do
 
       context "release number" do
         subject { @macro.card_number @macro.release_parameter }
-        it { should == 4 }
+        it { should == "4" }
       end
 
       context "release name" do

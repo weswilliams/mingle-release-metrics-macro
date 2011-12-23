@@ -7,7 +7,6 @@
   <li>Scheduled End Date is <%= release.end_date %></li>
 </ul>
 
-
 <table>
   <tr>
     <th>Current Iteration</th>
@@ -23,23 +22,23 @@
       </a>
     </th>
     <th>Required <br/> Iterations</th>
-    <th>Calculated Development End Date <br/> Based on <%= release.days_in_iteration %> Day Iterations</th>
+    <th>Calculated Development End Date <br/> Based on <%= all_iterations.days_in_iteration %> Day Iterations</th>
   </tr>
   <tr>
     <th>Average Velocity <br/> (last 3 iterations)</th>
-    <td><%= "%.2f" % release.last_3_average %></td>
+    <td><%= "%.2f" % all_iterations.last_3_average %></td>
     <th> </th>
-    <td> Average velocity of <br/> last 3 iterations (<%= "%.2f" % release.last_3_average %>)</td>
-    <td><%= release.remaining_iters :last_3_average %></td>
-    <td><%= release.completion_date :last_3_average %></td>
+    <td> Average velocity of <br/> last 3 iterations (<%= "%.2f" % all_iterations.last_3_average %>)</td>
+    <td><%= release.remaining_iters :last_3_average, all_iterations %></td>
+    <td><%= release.completion_date :last_3_average, all_iterations %></td>
   </tr>
   <tr>
     <th>Completed Iterations</th>
     <td><%= release.completed_iterations %></td>
     <th> </th>
-    <td> Average velocity of <br/> all iterations (<%= "%.2f" % release.average_velocity %>)</td>
-    <td><%= release.remaining_iters :average_velocity %></td>
-    <td><%= release.completion_date :average_velocity %></td>
+    <td> Average velocity of <br/> all iterations (<%= "%.2f" % all_iterations.average_velocity %>)</td>
+    <td><%= release.remaining_iters :average_velocity, all_iterations %></td>
+    <td><%= release.completion_date :average_velocity, all_iterations %></td>
   </tr>
   <tr>
     <th>Completed Story Points</th>
@@ -59,7 +58,7 @@
   </tr>
   <tr>
     <th>Iteration Length <br/> (calculated based on <br/> last iteration completed)</th>
-    <td><%= release.days_in_iteration %> days</td>
+    <td><%= all_iterations.days_in_iteration %> days</td>
     <th> </th>
     <td><% if show_what_if_parameter %>What if velocity: <input type="text" id="what-if-velocity"/><% end %></td>
     <td><% if show_what_if_parameter %><span id="what-if-iterations"></span><% end %></td>
@@ -82,7 +81,7 @@
     MingleJavascript.register(function initialize() {
         try {
             macroDebug.log('starting whatIf');
-            whatIf.init(<%= release.days_in_iteration %>, <%= release.remaining_story_points %>, new Date('<%= release.last_end_date %>'));
+            whatIf.init(<%= all_iterations.days_in_iteration %>, <%= release.remaining_story_points %>, new Date('<%= release.last_end_date %>'));
         } catch(err) {
             macroDebug(err);
         }

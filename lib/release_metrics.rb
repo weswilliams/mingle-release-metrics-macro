@@ -32,6 +32,7 @@ module CustomMacro
         }
         # release used in erb files
         release = current_release release_data
+        all_iterations = all_iterations()
         render_view view_parameter, binding
       rescue Exception => e
         error_view(e)
@@ -73,7 +74,19 @@ module CustomMacro
                 "ORDER BY '#{end_date_field}' desc")
         Iterations.new completed_iterations, velocity_parameter, end_date_parameter, start_date_parameter
       rescue Exception => e
-        raise "[error retrieving completed iterations for #{release_parameter}: #{e}]"
+        raise "[error retrieving completed release iterations for #{release_parameter}: #{e}]"
+      end
+    end
+
+    def all_iterations
+      begin
+        completed_iterations = @project.execute_mql(
+            "SELECT name, '#{start_date_field}', '#{end_date_field}', #{velocity_field} " +
+                "WHERE Type = #{time_box_type} AND '#{end_date_field}' < today " +
+                "ORDER BY '#{end_date_field}' desc")
+        Iterations.new completed_iterations, velocity_parameter, end_date_parameter, start_date_parameter
+      rescue Exception => e
+        raise "[error retrieving all completed iterations: #{e}]"
       end
     end
 

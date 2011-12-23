@@ -14,14 +14,15 @@ module CustomMacro
       @completed_stories = release_data[:completed_stories]
     end
 
-    def remaining_iters(velocity_method)
-      velocity = @iterations.send velocity_method.to_s
+    def remaining_iters(velocity_method, iterations = nil)
+      for_iterations = iterations || @iterations
+      velocity = for_iterations.send velocity_method.to_s
       return 'Unknown' if velocity <= 0
       (@remaining_stories.story_points / velocity).ceil
     end
 
-    def completion_date(velocity_method)
-      remaining_iterations = remaining_iters velocity_method
+    def completion_date(velocity_method, iterations= nil)
+      remaining_iterations = remaining_iters velocity_method, iterations
       return 'Unknown' if remaining_iterations == 'Unknown'
       @iterations.last_end_date + (@iterations.days_in_iteration * remaining_iterations)
     end
