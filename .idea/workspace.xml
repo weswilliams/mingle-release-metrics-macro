@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="896f3183-d0dd-4709-b991-e0ca93bdf26e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/release.rb" afterPath="$PROJECT_DIR$/lib/release.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/release_metrics.rb" afterPath="$PROJECT_DIR$/lib/release_metrics.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/spec/parameter_spec.rb" afterPath="$PROJECT_DIR$/test/spec/parameter_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/full_table.erb" afterPath="$PROJECT_DIR$/views/full_table.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mini_table.erb" afterPath="$PROJECT_DIR$/views/mini_table.erb" />
-    </list>
+    <list default="true" id="896f3183-d0dd-4709-b991-e0ca93bdf26e" name="Default" comment="" />
     <ignored path="mingle-release-metrics.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
